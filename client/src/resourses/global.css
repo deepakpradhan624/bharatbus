@@ -1,0 +1,52 @@
+/* height and widths */
+
+.h-screen{
+    height: auto ;
+    
+}
+.w-400{
+    width: 400px;
+    
+}
+
+input{
+    height: 40px;
+    border: 2px solid teal;
+    width: 100%;
+    padding-left: 20px;
+}
+
+.card{
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    padding: 2%;
+}
+
+
+/* buttons */
+
+.primary-btn{
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.secondary-btn{
+    background-color: var(--secondary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.secondary-btn:hover{
+    background-color: var(--primary);
+    border-radius: 20px;
+}
+
+
+a{
+    text-decoration: none;
+    color: var(--primary);
+}
