@@ -4,24 +4,27 @@ import "../resourses/auth.css";
 import "../resourses/global.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+// import { useDispatch } from "react-redux";
+// import { HideLoading, ShowLoading } from "../redux/alertsSlice";
 
 const Login = () => {
-
-  const navigate=useNavigate()
-  const onFinish = async(values) => {
-    try{
- const response=await axios.post("/api/users/login",values);
- if(response.data.success){
-  message.success(response.data.message);
-  localStorage.setItem("token",response.data.data)
-navigate("/") 
-
-}else{
-  message.error(response.data.message)
- }
-    }
-    catch(error){
-message.error(error.message)
+  // const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const onFinish = async (values) => {
+    try {
+      
+      const response = await axios.post("/api/users/login", values);
+     
+      if (response.data.success) {
+        message.success(response.data.message);
+        localStorage.setItem("token", response.data.data);
+        navigate("/");
+      } else {
+        message.error(response.data.message);
+      }
+    } catch (error) {
+     
+      message.error(error.message);
     }
   };
   return (

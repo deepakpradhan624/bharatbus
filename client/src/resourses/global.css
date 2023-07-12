@@ -50,3 +50,27 @@ a{
     text-decoration: none;
     color: var(--primary);
 }
+
+/* Loader */
+
+.spinner-parent{
+    position: absolute;
+    top:0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.418);
+}
+.spinner-border{
+    color: white;
+    height: 80px;
+    width: 80px;
+
+}
+h1{
+    margin-bottom: 0;
+    padding-bottom: 0;
+}

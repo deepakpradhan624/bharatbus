@@ -1,0 +1,70 @@
+.layout-parent {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  padding: 15px;
+  height: 100vh;
+  gap: 20px;
+}
+.body {
+  width: 100%;
+}
+.header {
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  width: 100%;
+  padding: 20px;
+}
+
+.sidebar {
+
+  background-color: var(--primary);
+  border-radius: 6px;
+  display: flex;
+  
+  justify-content: start;
+  padding: 0 20px;
+  flex-direction: column;
+  
+}
+.logo{
+  color: white;
+}
+.role{
+color: white;
+font-size: 17px;
+}
+.menu{
+  margin-top: 150px;
+}
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding: 5px 15px;
+  width: 100%;
+  cursor: pointer;
+  transition: 0.2s;
+  gap: 18px;
+}
+.active-menu-item {
+  border: 2px solid white;
+  border-radius: 8px;
+}
+
+.menu-item i {
+  font-size: 20px;
+  color: white;
+  margin-right: 10px;
+}
+.menu-item span {
+  font-size: 15px;
+  color: white;
+}
+.content {
+  padding: 10px;
+}
+
+i {
+  cursor: pointer;
+  font-size: 25px;
+}
