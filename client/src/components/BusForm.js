@@ -2,32 +2,49 @@ import React from "react";
 import { Col, Form, Modal, Row, message } from "antd";
 import { axiosInstance } from "../helpers/axiosInstance";
 
-const BusForm = ({ showBusForm, setShowBusForm, type = "add" }) => {
+const BusForm = ({
+  showBusForm,
+  setShowBusForm,
+  type = "add",
+  getData,
+  selectedBus,
+  setSelectedBus
+}) => {
   const onFinish = async (values) => {
     try {
       let response = null;
       if (type === "add") {
         response = await axiosInstance.post("/api/buses/add-bus", values);
       } else {
+        response=await axiosInstance.post("/api/buses/update-bus",{
+          ...values,
+          _id:selectedBus._id
+        })
       }
       if (response.data.success) {
         message.success(response.data.message);
       } else {
         message.error(response.data.message);
       }
+      getData()
+      setShowBusForm(false)
+      setSelectedBus(null)
     } catch (error) {
       message.error(error.message);
     }
   };
   return (
     <Modal
-      title="Add Bus"
+      title={type==="add" ? "Add Bus" : "Update Bus"}
       visible={showBusForm}
-      onCancel={() => setShowBusForm(false)}
+      onCancel={() => {
+        setSelectedBus(null)
+        setShowBusForm(false)
+      }}
       footer={false}
       width={800}
     >
-      <Form layout="vertical" onFinish={onFinish}>
+      <Form layout="vertical" onFinish={onFinish} initialValues={selectedBus}>
         <Row gutter={[10, 10]}>
           <Col lg={24} xs={24}>
             <Form.Item label="Bus Name" name="name">
