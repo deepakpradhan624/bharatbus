@@ -10,7 +10,7 @@ const busSchema=new mongoose.Schema({
         required:true
     },
     capacity:{
-        type:String,
+        type:Number,
         required:true
     },
     from:{

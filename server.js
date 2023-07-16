@@ -9,8 +9,11 @@ app.use(express.json());
 
 const usersRoute = require("../compassbus/routes/usersRoute");
 const busesRoute=require("../compassbus/routes/busesRoute")
+const bookingsRoute=require("../compassbus/routes/bookingsRoute")
 
 app.use("/api/users", usersRoute);
 app.use("/api/buses", busesRoute);
+app.use("/api/bookings", bookingsRoute)
+
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

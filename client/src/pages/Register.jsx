@@ -2,13 +2,14 @@ import { Form, message } from "antd";
 import React from "react";
 import "../resourses/auth.css";
 import "../resourses/global.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 // import { useDispatch } from "react-redux";
 // import { HideLoading, ShowLoading } from "../redux/alertsSlice";
 
 const Register = () => {
   // const dispatch = useDispatch();
+  const navigate=useNavigate()
   const onFinish = async (values) => {
     try {
       // dispatch(ShowLoading());
@@ -16,6 +17,7 @@ const Register = () => {
       // dispatch(HideLoading());
       if (response.data.success) {
         message.success(response.data.message);
+        navigate("/login")
       } else {
         message.error(response.data.message);
       }
