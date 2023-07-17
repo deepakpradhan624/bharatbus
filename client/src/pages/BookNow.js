@@ -4,6 +4,7 @@ import { axiosInstance } from "../helpers/axiosInstance";
 import { Col, Row, message } from "antd";
 import { useParams } from "react-router-dom";
 import SeatSelection from "../components/SeatSelection";
+import StripeCheckout from "react-stripe-checkout";
 
 const BookNow = () => {
   const params = useParams();
@@ -26,14 +27,33 @@ const BookNow = () => {
     }
   };
 
-  const bookNow = async () => {
+  const bookNow = async (transactionId) => {
     try {
       const response = await axiosInstance.post("/api/bookings/book-seat", {
         bus: bus._id,
         seats: selectedSeats,
+        transactionId,
+
       });
       if (response.data.success) {
         message.success(response.data.message);
+      } else {
+        message.error(response.data.message);
+      }
+    } catch (error) {
+      message.error(error.message);
+    }
+  };
+
+  const onToken = async (token) => {
+    try {
+      const response = await axiosInstance.post("/api/bookings/make-payment", {
+        token,
+        amount: selectedSeats.length * bus.fare * 100,
+      });
+      if (response.data.success) {
+        message.success(response.data.message);
+        bookNow(response.data.data.transactionId)
       } else {
         message.error(response.data.message);
       }
@@ -84,14 +104,24 @@ const BookNow = () => {
                 <b>Fare:</b> ₹ {bus.fare * selectedSeats.length}/-
               </h1>
               <hr />
-              <button className={`btn secondary-btn ${
-                selectedSeats.length===0 && "disabled-btn"
-              }`} 
-              onClick={bookNow}
-              disabled={selectedSeats.length===0}
+
+              <StripeCheckout
+                billingAddress
+                token={onToken}
+                amount={bus.fare * selectedSeats.length * 100}
+                currency="INR"
+                payment_method= 'pm_card_visa'
+                stripeKey="pk_test_51NUgubSJLLofikp9W4YRlUAxVrfWNJBORF5lFPZE6cWDq76sbmSY5YkMuRi1AUOFZ1GV6lv7PkyXzbzxTC5FnenB00BbsDF8yM"
               >
-                Book Now
-              </button>
+                <button
+                  className={`btn secondary-btn ${
+                    selectedSeats.length === 0 && "disabled-btn"
+                  }`}
+                  disabled={selectedSeats.length === 0}
+                >
+                  Book Now
+                </button>
+              </StripeCheckout>
             </div>
           </Col>
           <Col lg={12} xs={24} sm={24}>
