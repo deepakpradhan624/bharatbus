@@ -32,7 +32,7 @@ const BookNow = () => {
       const response = await axiosInstance.post("/api/bookings/book-seat", {
         bus: bus._id,
         seats: selectedSeats,
-        transactionId,
+        transactionId, 
 
       });
       if (response.data.success) {
@@ -67,7 +67,7 @@ const BookNow = () => {
   return (
     <div>
       {bus && (
-        <Row className="md-3">
+        <Row className="md-3" gutter={[30,30]}>
           <Col lg={12} xs={24} sm={24}>
             <h1 className="text-primary">{bus.name}</h1>
             <p className="text-md">

@@ -10,6 +10,7 @@ import AdminHome from "./pages/Admin/AdminHome";
 import AdminBuses from "./pages/Admin/AdminBuses";
 import AdminUsers from "./pages/Admin/AdminUsers";
 import BookNow from "./pages/BookNow";
+import Bookings from "./pages/Bookings";
 // import Loader from "./components/Loader";
 // import { useSelector } from "react-redux";
 
@@ -35,6 +36,15 @@ function App() {
             element={
               <ProtectedRoute>
                 <BookNow />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/bookings"
+            element={
+              <ProtectedRoute>
+                <Bookings />
               </ProtectedRoute>
             }
           />
