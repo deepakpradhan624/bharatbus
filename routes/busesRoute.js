@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const authMiddleware = require("../middlewares/authMiddleware");
-const Bus = require("../models/BusModel");
+const Bus = require("../models/busModel");
 
 // add bus
 
