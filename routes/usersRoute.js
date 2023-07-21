@@ -2,7 +2,7 @@ const router = require("express").Router();
 const User = require("../models/usersModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const authMiddleware=require("../middlewares/authMiddleware")
+const authMiddleware = require("../middlewares/authMiddleware");
 // register new user
 router.post("/register", async (req, res) => {
   try {
@@ -43,6 +43,13 @@ router.post("/login", async (req, res) => {
         data: null,
       });
     }
+     if(userExist.isBlocked){
+      return res.send({
+        message:"User is blocked",
+        success:false,
+        data:null
+      })
+     }
 
     const passwordMatch = await bcrypt.compare(
       req.body.password,
@@ -73,22 +80,57 @@ router.post("/login", async (req, res) => {
 });
 
 // get-user-by-id
-router.post("/get-user-by-id", authMiddleware,async(req,res)=>{
+router.post("/get-user-by-id", authMiddleware, async (req, res) => {
   try {
-    const user=await User.findById(req.body.userId);
+    const user = await User.findById(req.body.userId);
     res.send({
-      message:"User fetched successfully",
-      success:true,
-      data:user,
-    })
+      message: "User fetched successfully",
+      success: true,
+      data: user,
+    });
   } catch (error) {
     res.send({
-      message:error.message,
-      success:false,
-      data:null
-    })
+      message: error.message,
+      success: false,
+      data: null,
+    });
   }
-})
+});
 
+// get all users
+router.post("/get-all-users", authMiddleware, async (req, res) => {
+  try {
+    console.log("Request Body:", req.body);
+    const users = await User.find({});
+    res.send({
+      message: "Users fetched successfully",
+      success: true,
+      data: users,
+    });
+  } catch (error) {
+    res.send({
+      message: error.message,
+      success: false,
+      data: null,
+    });
+  }
+});
 
+// update users
+router.post("/update-user-permissions", authMiddleware, async (req, res) => {
+  try {
+    await User.findByIdAndUpdate(req.body._id, req.body);
+    res.send({
+      message: "User update successfully",
+      success: true,
+      data: null,
+    });
+  } catch (error) {
+    res.send({
+      message: error.message,
+      success: false,
+      data: null,
+    });
+  }
+});
 module.exports = router;

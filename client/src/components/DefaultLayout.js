@@ -33,7 +33,7 @@ const DefaultLayout = ({ children }) => {
   const adminMenu = [
     {
       name: "Home",
-      path: "/admin",
+      path: "/",
       icon: "ri-home-3-line",
     },
     {
@@ -46,11 +46,11 @@ const DefaultLayout = ({ children }) => {
       path: "/admin/users",
       icon: "ri-user-fill",
     },
-    {
-      name: "Bookings",
-      path: "/admin/bookings",
-      icon: "ri-file-list-3-line",
-    },
+    // {
+    //   name: "Bookings",
+    //   path: "/admin/bookings",
+    //   icon: "ri-file-list-3-line",
+    // },
     {
       name: "Logout",
       path: "/logout",
@@ -66,7 +66,7 @@ activeRoute="/"
     <div className="layout-parent">
       <div className="sidebar">
         <div className="sidebar-header">
-          <h1 className="logo">CB</h1>
+          <h1 className="logo">BB</h1>
           <h1 className="role">{user?.name} <br/> Role:{user?.isAdmin ? "Admin" : "User" }</h1>
         </div>
         <div className="d-flex flex-column gap-3 justify-content-start menu">

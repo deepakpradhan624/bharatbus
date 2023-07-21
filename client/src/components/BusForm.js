@@ -8,7 +8,7 @@ const BusForm = ({
   type = "add",
   getData,
   selectedBus,
-  setSelectedBus
+  setSelectedBus,
 }) => {
   const onFinish = async (values) => {
     try {
@@ -16,30 +16,30 @@ const BusForm = ({
       if (type === "add") {
         response = await axiosInstance.post("/api/buses/add-bus", values);
       } else {
-        response=await axiosInstance.post("/api/buses/update-bus",{
+        response = await axiosInstance.post("/api/buses/update-bus", {
           ...values,
-          _id:selectedBus._id
-        })
+          _id: selectedBus._id,
+        });
       }
       if (response.data.success) {
         message.success(response.data.message);
       } else {
         message.error(response.data.message);
       }
-      getData()
-      setShowBusForm(false)
-      setSelectedBus(null)
+      getData();
+      setShowBusForm(false);
+      setSelectedBus(null);
     } catch (error) {
       message.error(error.message);
     }
   };
   return (
     <Modal
-      title={type==="add" ? "Add Bus" : "Update Bus"}
+      title={type === "add" ? "Add Bus" : "Update Bus"}
       visible={showBusForm}
       onCancel={() => {
-        setSelectedBus(null)
-        setShowBusForm(false)
+        setSelectedBus(null);
+        setShowBusForm(false);
       }}
       footer={false}
       width={800}
@@ -98,6 +98,15 @@ const BusForm = ({
           <Col lg={12} xs={24}>
             <Form.Item label="Fare" name="fare">
               <input type="text" />
+            </Form.Item>
+          </Col>
+          <Col lg={12} xs={24}>
+            <Form.Item label="Status" name="status">
+              <select>
+                <option value="Yettostart">Yet To Start</option>
+                <option value="Running">Running</option>
+                <option value="Completed">Completed</option>
+              </select>
             </Form.Item>
           </Col>
         </Row>

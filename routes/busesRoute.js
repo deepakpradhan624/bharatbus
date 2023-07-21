@@ -57,7 +57,9 @@ router.post("/delete-bus", authMiddleware, async (req, res) => {
 
 router.post("/get-all-buses", authMiddleware, async (req, res) => {
   try {
+    // console.log("Request Body:", req.body);
     const buses = await Bus.find();
+    // console.log("Buses Found:", Bus);
     return res.status(200).send({
       success: true,
       message: "Buses fetched successfully",
@@ -72,17 +74,17 @@ router.post("/get-all-buses", authMiddleware, async (req, res) => {
 });
 
 // get Bus by id
-router.post("/book-now/:id",authMiddleware,async(req,res)=>{
+router.post("/book-now/:id", authMiddleware, async (req, res) => {
   try {
-    const bus=await Bus.findById(req.body._id);
+    const bus = await Bus.findById(req.body._id);
     return res.status(200).send({
-      success:true,
-      message:"Bus fetched successfully",
-      data:bus,
-    })
+      success: true,
+      message: "Bus fetched successfully",
+      data: bus,
+    });
   } catch (error) {
-    res.status(500).send({success:false,message:error.message})
+    res.status(500).send({ success: false, message: error.message });
   }
-})
+});
 
 module.exports = router;

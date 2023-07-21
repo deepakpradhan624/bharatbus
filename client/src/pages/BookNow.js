@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 // import { useSelector } from "react-redux";
 import { axiosInstance } from "../helpers/axiosInstance";
 import { Col, Row, message } from "antd";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import SeatSelection from "../components/SeatSelection";
 import StripeCheckout from "react-stripe-checkout";
 
@@ -10,6 +10,7 @@ const BookNow = () => {
   const params = useParams();
   const [bus, setBus] = useState(null);
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const navigate=useNavigate()
 
   const getBus = async () => {
     try {
@@ -37,6 +38,7 @@ const BookNow = () => {
       });
       if (response.data.success) {
         message.success(response.data.message);
+        navigate("/bookings")
       } else {
         message.error(response.data.message);
       }
