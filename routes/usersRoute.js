@@ -43,13 +43,13 @@ router.post("/login", async (req, res) => {
         data: null,
       });
     }
-     if(userExist.isBlocked){
+    if (userExist.isBlocked) {
       return res.send({
-        message:"User is blocked",
-        success:false,
-        data:null
-      })
-     }
+        message: "User is blocked",
+        success: false,
+        data: null,
+      });
+    }
 
     const passwordMatch = await bcrypt.compare(
       req.body.password,
@@ -133,4 +133,5 @@ router.post("/update-user-permissions", authMiddleware, async (req, res) => {
     });
   }
 });
+
 module.exports = router;
