@@ -68,3 +68,7 @@ i {
   cursor: pointer;
   font-size: 25px;
 }
+
+.profile-img{
+  width: 500px;
+}
